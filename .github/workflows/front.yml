@@ -94,7 +94,7 @@ jobs:
       with:
         args: -Dproject.settings=front/sonar-project.properties
       env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FRONT }}
 
   deployment:
     runs-on: ubuntu-latest
