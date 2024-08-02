@@ -64,7 +64,7 @@ jobs:
             git push origin main
           fi
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}    
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN_BACK }}    
 
   quality:
     runs-on: ubuntu-latest
