@@ -25,6 +25,9 @@ jobs:
           mvn -B test --file pom.xml   
         working-directory: ./back/
 
+      - name: List files in target directory
+        run: ls -R back/target/site/jacoco/
+
       - name: Generate back report
         uses: actions/upload-artifact@v4.3.3
         with:
