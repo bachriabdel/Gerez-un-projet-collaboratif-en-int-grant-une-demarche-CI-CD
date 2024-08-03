@@ -25,22 +25,22 @@ jobs:
           mvn -B test --file pom.xml   
         working-directory: ./back/
 
-      - name: List files in target directory
-        run: ls -R back/target/site/jacoco/
-
-      - name: Cache Jacoco report
-        uses: actions/cache@v3
-        with:
-          path: back/target/site/jacoco/
-          key: jacoco-report-${{ github.sha }}
-          restore-keys: |
-            jacoco-report-
-
       - name: Generate back report
         uses: actions/upload-artifact@v4.3.3
         with:
           name: Back-report
           path: back/target/site/jacoco/
+
+      - name: Commit Jacoco report
+        run: |
+          git add back/target/site/jacoco
+          git commit -m "Add Jacoco report"
+
+      - name: Push Jacoco report
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
 
       - name: Badge with back coverage
         uses: cicirello/jacoco-badge-generator@v2
