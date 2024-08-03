@@ -84,13 +84,10 @@ jobs:
         name: Back-report
         path: ./artifact/
 
-    - name: Cache Jacoco report
-      uses: actions/cache@v3
-      with:
-        path: back/target/site/jacoco/
-        key: jacoco-report-${{ github.sha }}
-        restore-keys: |
-          jacoco-report-
+    - name: Extract Back Report
+      run: |
+        mkdir -p back/target/site/jacoco
+        cp -r ./artifact/* back/target/site/jacoco
 
     - name: Verify Jacoco report
       run: ls -l back/target/site/jacoco/
