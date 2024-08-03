@@ -92,11 +92,11 @@ jobs:
 
     - name: Build backend with Maven
       run: cd back && mvn clean install -DskipTests
-
+      
     - name: SonarCloud Scan 
-      run: |
-        cd back
-        sonar-scanner -Dproject.settings=sonar-project.properties
+      uses: sonarsource/sonarcloud-github-action@v2.3.0
+      with:
+        args: -Dproject.settings=back/sonar-project.properties
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_BACK }}
 
