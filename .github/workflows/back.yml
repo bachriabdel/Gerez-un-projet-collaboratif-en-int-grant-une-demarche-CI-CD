@@ -71,12 +71,7 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: Back-report
-        path: ./artifact/
-
-    - name: Extract Back Report
-      run: |
-        mkdir -p back/target/site/jacoco
-        cp -r ./artifact/* back/target/site/jacoco/
+        path: back/target/site/jacoco/
 
     - name: Verify Jacoco report
       run: ls -l back/target/site/jacoco/
