@@ -72,6 +72,12 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: Front-report
+        path: ./artifact/
+
+    - name: Extract Front Report
+      run: |
+        mkdir -p front/coverage/bobapp
+        cp -r ./artifact/* front/coverage/bobapp
         
     - name: Use Node.js
       uses: actions/setup-node@v4
