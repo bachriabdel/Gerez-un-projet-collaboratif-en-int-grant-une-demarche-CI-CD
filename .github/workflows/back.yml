@@ -33,7 +33,9 @@ jobs:
 
       - name: Commit Jacoco report
         run: |
-          git add back/target/site/jacoco
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
+          git add -f back/target/site/jacoco
           git commit -m "Add Jacoco report"
 
       - name: Push Jacoco report
