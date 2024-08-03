@@ -28,6 +28,14 @@ jobs:
       - name: List files in target directory
         run: ls -R back/target/site/jacoco/
 
+      - name: Cache Jacoco report
+        uses: actions/cache@v3
+        with:
+          path: back/target/site/jacoco/
+          key: jacoco-report-${{ github.sha }}
+          restore-keys: |
+            jacoco-report-
+
       - name: Generate back report
         uses: actions/upload-artifact@v4.3.3
         with:
@@ -76,10 +84,13 @@ jobs:
         name: Back-report
         path: ./artifact/
 
-    - name: Extract Back Report
-      run: |
-        mkdir -p back/target/site/jacoco
-        cp -r ./artifact/* back/target/site/jacoco/
+    - name: Cache Jacoco report
+      uses: actions/cache@v3
+      with:
+        path: back/target/site/jacoco/
+        key: jacoco-report-${{ github.sha }}
+        restore-keys: |
+          jacoco-report-
 
     - name: Verify Jacoco report
       run: ls -l back/target/site/jacoco/
