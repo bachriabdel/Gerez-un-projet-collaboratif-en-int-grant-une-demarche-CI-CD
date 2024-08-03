@@ -84,6 +84,12 @@ jobs:
 
     - name: Build backend with Maven
       run: cd back && mvn clean install -DskipTests
+
+    - name: Print working directory
+      run: pwd
+
+    - name: List files in current directory
+      run: ls -R
       
     - name: SonarCloud Scan 
       uses: sonarsource/sonarcloud-github-action@v2.3.0
