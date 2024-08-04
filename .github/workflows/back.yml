@@ -26,7 +26,8 @@ jobs:
  #       working-directory: ./back/
 
       - name: Test with Maven
-        run: mvn -B clean test
+        working-directory: back
+        run: mvn -B clean test          
 
       - name: Generate back report
         uses: actions/upload-artifact@v4.3.3
