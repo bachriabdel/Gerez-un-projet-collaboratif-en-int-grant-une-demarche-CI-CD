@@ -88,20 +88,12 @@ jobs:
     - name: List files in current directory
       run: ls -R
       
-#    - name: SonarCloud Scan 
-#      uses: sonarSource/sonarcloud-github-action@master
-#      with:
-#        args: -Dproject.settings=back/sonar-project.properties        
-#      env:
-#        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_BACK }}
-
-    - name: Build and Sonar Analyze
-      working-directory: back
+    - name: SonarCloud Scan 
+      uses: sonarSource/sonarcloud-github-action@master
+      with:
+        args: -Dproject.settings=back/sonar-project.properties        
       env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_BACK }}
-      run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=bdrorg_demarche-ci-cd-back -f pom.xml
-
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_BACK }}
 
   deployment:
     runs-on: ubuntu-latest
