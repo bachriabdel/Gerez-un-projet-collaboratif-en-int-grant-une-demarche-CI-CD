@@ -19,11 +19,14 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
 
-      - name: Build and test with Maven
-        run: |
-          mvn -B package --file pom.xml
-          mvn -B test --file pom.xml   
-        working-directory: ./back/
+ #     - name: Build and test with Maven
+  #      run: |
+ #         mvn -B package --file pom.xml
+ #         mvn -B test --file pom.xml   
+ #       working-directory: ./back/
+
+      - name: Test with Maven
+        run: mvn -B clean test
 
       - name: Generate back report
         uses: actions/upload-artifact@v4.3.3
@@ -88,12 +91,19 @@ jobs:
     - name: List files in current directory
       run: ls -R
       
-    - name: SonarCloud Scan 
-      uses: sonarSource/sonarcloud-github-action@master
-      with:
-        args: -Dproject.settings=back/sonar-project.properties        
+#    - name: SonarCloud Scan 
+#      uses: sonarSource/sonarcloud-github-action@master
+#      with:
+#        args: -Dproject.settings=back/sonar-project.properties        
+#      env:
+#        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_BACK }}
+
+    - name: Build and Sonar Analyze
       env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_BACK }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_BACK }}
+      run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=bdrorg_demarche-ci-cd-back -f pom.xml
+
 
   deployment:
     runs-on: ubuntu-latest
