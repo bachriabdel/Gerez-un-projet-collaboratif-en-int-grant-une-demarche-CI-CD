@@ -86,7 +86,6 @@ jobs:
       uses: sonarSource/sonarcloud-github-action@master
       with:
         args: -Dproject.settings=back/sonar-project.properties
-        fetch-depth: 0
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_BACK }}
 
@@ -96,7 +95,9 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
       
     - name: Install dependencies for back-end
       run: |
