@@ -1,6 +1,6 @@
 ### Back-end coverage : 
 ![Back-end Coverage](badges/bobapp/backendBadge.svg)
-toto
+
 ### Front-end coverage :
 ![Front Coverage](badges/bobapp/coverage.svg)
 
