@@ -80,7 +80,7 @@ jobs:
         distribution: 'adopt'   
 
     - name: Build backend with Maven
-      run: cd back && mvn clean install -DskipTests
+      run: cd back && mvn clean install 
 
     - name: Print working directory
       run: pwd
