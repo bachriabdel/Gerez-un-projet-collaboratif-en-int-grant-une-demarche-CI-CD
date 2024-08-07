@@ -81,17 +81,12 @@ jobs:
 
     - name: Build backend with Maven
       run: cd back && mvn clean install 
-
-    - name: Print working directory
-      run: pwd
-
-    - name: List files in current directory
-      run: ls -R
       
     - name: SonarCloud Scan 
       uses: sonarSource/sonarcloud-github-action@master
       with:
-        args: -Dproject.settings=back/sonar-project.properties        
+        args: -Dproject.settings=back/sonar-project.properties
+        fetch-depth: 0
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_BACK }}
 
